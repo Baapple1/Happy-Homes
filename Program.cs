@@ -1,10 +1,12 @@
 ﻿
 
 using Happy_Homes;
+using System.ComponentModel.Design;
 using System.Numerics;
 using System.Security.Cryptography;
 
-while (true){
+while (true)
+{
 
     // Login Sequence - Verify Staff & Determine Role
 
@@ -54,22 +56,21 @@ while (true){
 [6] Enterprise");
                         sInput = Console.ReadLine();
                         Console.Clear();
-                        success = int.TryParse(sInput, out input);
-                        if (success && input >= 1 && input <= 6)
+                        if (int.TryParse(sInput, out input))
                         {
                             // Detached
                             if (input == 1)
                             {
                                 Console.WriteLine("Enter the Property Address:");
                                 string address = Console.ReadLine();
-                                Property.AddProperty("Detached", address);
+                                Property.AddProperty(PropertyType.Detached, address);
                             }
                             // Semi-Detached
                             else if (input == 2)
                             {
                                 Console.WriteLine("Enter the Property Address:");
                                 string address = Console.ReadLine();
-                                Property.AddProperty("Semi-Detached", address);
+                                Property.AddProperty(PropertyType.SemiDetached, address);
                             }
 
                             // Bungalow
@@ -77,7 +78,7 @@ while (true){
                             {
                                 Console.WriteLine("Enter the Property Address:");
                                 string address = Console.ReadLine();
-                                Property.AddProperty("Bungalow", address);
+                                Property.AddProperty(PropertyType.Bungalow, address);
                             }
 
                             // Flat
@@ -85,7 +86,7 @@ while (true){
                             {
                                 Console.WriteLine("Enter the Property Address:");
                                 string address = Console.ReadLine();
-                                Property.AddProperty("Flat", address);
+                                Property.AddProperty(PropertyType.Flat, address);
                             }
 
                             // Terrace
@@ -93,7 +94,7 @@ while (true){
                             {
                                 Console.WriteLine("Enter the Property Address:");
                                 string address = Console.ReadLine();
-                                Property.AddProperty("Terrace", address);
+                                Property.AddProperty(PropertyType.Terrace, address);
                             }
 
                             // Enterprise
@@ -101,7 +102,7 @@ while (true){
                             {
                                 Console.WriteLine("Enter the Property Address:");
                                 string address = Console.ReadLine();
-                                Property.AddProperty("Enterprise", address);
+                                Property.AddProperty(PropertyType.Enterprise, address);
                             }
                         }
                     }
@@ -131,12 +132,69 @@ while (true){
                     else if (input == 2)
                     {
                         // Customer ID
+                        Console.WriteLine("Enter Customer ID");
+                        string sCustomerID = Console.ReadLine();
+                        if (int.TryParse(sCustomerID, out int customerID))
+                        {
+                            if ()   //  If Customer ID matches
+                            {
+                                // Date
+                                Console.Clear();
+                                Console.WriteLine("Enter Date of Viewing");
+                                string sDate = Console.ReadLine();
+                                if (DateOnly.TryParse(sDate, out DateOnly date))
+                                {
+                                    // Time
+                                    Console.WriteLine("Enter Time of Viewing");
+                                    string sTime = Console.ReadLine();
+                                    if (TimeOnly.TryParse(sTime, out TimeOnly time))
+                                    {
+                                        // Property (address)
+                                        Console.WriteLine("Enter the Address of Viewing");
+                                        string address = Console.ReadLine();
+                                        if ()   // Valid Address 
+                                        {
+                                            //  Staff ID
+                                            Console.WriteLine("Enter Staff ID");
+                                            string sStaffID = Console.ReadLine();
+                                            if (int.TryParse(sStaffID, out int staffID))
+                                            {
+                                                if ()   // Valid StaffID && Available
+                                                {
+                                                    var booking = new Booking (customerID, date, time, address, BookingStatus.Booked, staffID);
+                                                    Console.WriteLine($"New booking Created: \n{booking}");
+                                                    // Set Staff to Unavailable
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.Clear();
+                                                Console.WriteLine("Invalid Input");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("Invalid Address");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Invalid Time");
+                                    }
+                                }
+                            }
+                            else
+                            {
 
-                        // Date
+                            }
+                        }
+                        
 
-                        // Time
+                        
 
-                        // Property (address)
+
 
                         // Staff ID
                         Console.WriteLine("[2]"); // Test
@@ -144,7 +202,7 @@ while (true){
                         Console.Clear();
                     }
                 }
-                
+
             }
 
             // Customers Menu
@@ -202,53 +260,5 @@ while (true){
             Console.WriteLine("Invalid Entry\n");
         }
     }
-
-    // Manager
-    // ELSE IF statement (StaffRole == Manager)
-    /*
-    if (StaffRole.Manager)
-            {
-            Console.WriteLine(@"[1] Properties
-    [2] Bookings
-    [3] Customers
-    [4] Staff
-    [5] Logout");
-
-            string sInput = Console.ReadLine();
-            Console.Clear();
-            bool success = int.TryParse(sInput, out int input);
-            if (success && input >= 1 && input <= 5)
-            {
-                // Properties Menu
-                if (input == 1)
-                {
-                    Console.WriteLine("1"); // Test
-                }
-
-                // Bookings Menu
-                else if (input == 2)
-                {
-                    Console.WriteLine("2"); // Test
-                }
-
-                 // Customers Menu
-                else if (input == 3)
-                {
-                    Console.WriteLine("3"); // Test
-                }
-
-                // Staff Menu
-                else if (input == 4)
-                {
-                    Console.WriteLine("4"); // Test
-                }
-
-                // Logout
-                else if (input == 5)
-                {
-                    Console.WriteLine("5"); // Test
-                }
-            }
-        }*/
 
 }
