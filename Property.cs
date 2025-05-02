@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Happy_Homes
 {
     public class Property
     {
-        public string Detached {  get; set; }
-        public string SemiDetatched { get; set; }
-        public string Bungalow { get; set; }
-        public string Flat {  get; set; }
-        public string Terrace {  get; set; }
-        public string Enterprise { get; set; }
-
-        // Constructor
-        public Property(string detached, string semiDetatched, string bungalow, string flat, string terrace, string enterprise)
-        {
-            Detached = detached;
-            SemiDetatched = semiDetatched;
-            Bungalow = bungalow;
-            Flat = flat;
-            Terrace = terrace;
-            Enterprise = enterprise;
-        }
+        // Attributes
+        public static Dictionary<PropertyType, string> properties { get; set; }
 
         // Methods
+        public static void ViewProperties()
+        {
+            foreach (var property in properties)
+            {
+                Console.WriteLine(@$"{property.Value}: {property.Key}
+-------------------------------");
+            }    
+        }
+        public static void AddProperty(PropertyType type, string address)
+        {
+            // Add the Property to the Dictionary
+            properties.Add(type, address);
+
+        }
     }
 }
