@@ -4,23 +4,27 @@ using Happy_Homes;
 using System.ComponentModel.Design;
 using System.Numerics;
 using System.Security.Cryptography;
+using System.Transactions;
 
 while (true)
 {
     Console.WriteLine(@"[1] Properties
 [2] Bookings
 [3] Customers
+[4] Staff
 [4] Logout");
     string sInput = Console.ReadLine();
     Console.Clear();
-    if (int.TryParse(sInput, out int input) && input >= 1 && input <= 4)
+    if (int.TryParse(sInput, out int input) && input >= 1 && input <= 5)
     {
 
         // Properties Menu
         if (input == 1)
         {
             Console.WriteLine(@"[1] View Properties
-[2] Add Property");
+[2] Add Property
+[3] Amend Property
+[4] Remove Property");
             sInput = Console.ReadLine();
             Console.Clear();
             if (int.TryParse(sInput, out input))
@@ -225,7 +229,7 @@ while (true)
             if (input == 1)
             {
                 Console.WriteLine("Existing Customers:\n");
-                // Pull from Customer Class
+                Customer.ViewCustomer();
                 Console.WriteLine("\nPush Key to Leave");
                 Console.ReadKey();
                 Console.Clear();
@@ -233,9 +237,53 @@ while (true)
             // Add Customer:
             else if (input == 2)
             {
-                // CustomerID
-
                 // CustomerForename
+                Console.WriteLine("Enter the Customer Forename:");
+                string forename = Console.ReadLine();
+                if (!string.IsNullOrEmpty(forename))
+                {
+                    // CustomerSurname
+                    Console.WriteLine("Enter the Customer Surname");
+                    string surname = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(surname))
+                    {
+                        // Email
+                        Console.WriteLine("Enter the Customer Email");
+                        string email = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(email))
+                        {
+                            // Postal
+                            Console.WriteLine("Enter the Customer Postal Address");
+                            string postal = Console.ReadLine();
+                            if (!string.IsNullOrEmpty(postal))
+                            {
+                                // Phone
+                                Console.WriteLine("Enter the Customer Phone Number");
+                                string sPhone = Console.ReadLine();
+                                if (int.TryParse(sPhone, out int phone))
+                                {
+                                    Console.WriteLine("Customer Added");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Input");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
 
                 // CustomerSurname
 
@@ -250,18 +298,21 @@ while (true)
                 Console.Clear();
             }
         }
+        //Staff menu
+        else if (input == 4)
+        {
+
+        }
+
+        // Logout
+        else if (input == 5)
+        {
+            Environment.Exit(0);
+        }
+
+        else
+        {
+            Console.WriteLine("Invalid Input\n");
+        }
     }
-
-
-    // Logout
-    else if (input == 4)
-    {
-        Environment.Exit(0);
-    }
-
-    else
-    {
-        Console.WriteLine("Invalid Input\n");
-    }
-
 }
