@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -26,6 +27,10 @@ namespace Happy_Homes
             // Add the Property to the Dictionary
             properties.Add(type, address);
 
+        }
+        public static bool ValidateProperty(string address)
+        {
+            return properties.Any(property => property.Value == address);   // Checks Properties Dictionary for matching address
         }
     }
 }
