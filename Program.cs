@@ -142,7 +142,7 @@ while (true)
                 string sCustomerID = Console.ReadLine();
                 if (int.TryParse(sCustomerID, out int customerID))
                 {
-                    if ()   //  If Customer ID matches && score != 3
+                    if (Customer.ValidateCustomer(customerID))   // Validate customerID && score != 3
                     {
                         // Date
                         Console.Clear();
@@ -151,25 +151,32 @@ while (true)
                         if (DateOnly.TryParse(sDate, out DateOnly date))
                         {
                             // Time
+                            Console.Clear();
                             Console.WriteLine("Enter Time of Viewing");
                             string sTime = Console.ReadLine();
                             if (TimeOnly.TryParse(sTime, out TimeOnly time))
                             {
                                 // Property (address)
+                                Console.Clear();
                                 Console.WriteLine("Enter the Address of Viewing");
                                 string address = Console.ReadLine();
-                                if ()   // Valid Address 
+                                if (Property.ValidateProperty(address))   // Validate address
                                 {
                                     //  Staff ID
+                                    Console.Clear();
                                     Console.WriteLine("Enter Staff ID");
                                     string sStaffID = Console.ReadLine();
                                     if (int.TryParse(sStaffID, out int staffID))
                                     {
-                                        if ()   // Valid StaffID && Available
+                                        if (Staff.ValidateStaff(staffID))   // Validate StaffID && check Availability
                                         {
+                                            Console.Clear();
                                             var booking = new Booking(customerID, date, time, address, BookingStatus.Booked, staffID);
                                             Console.WriteLine($"New booking Created: \n{booking}");
                                             // Set Staff to Unavailable
+                                            var staffStatus = Staff.staffList.First(staff => staff.StaffID == staffID); // Searches for first corresponding staffID in list
+                                            staffStatus.Status = StaffStatus.Unavailable;   // Sets staff to Unavailable
+
                                         }
                                         else
                                         {
@@ -220,6 +227,7 @@ while (true)
     // Customers Menu
     else if (input == 3)
     {
+        Console.Clear();
         Console.WriteLine(@"[1] View Bookings
 [2] Add Booking");
         sInput = Console.ReadLine();
@@ -228,7 +236,7 @@ while (true)
         {
             //View Customers:
             if (input == 1)
-            {
+            { 
                 Console.WriteLine("Existing Customers:\n");
                 Customer.ViewCustomer();
                 Console.WriteLine("\nPush Key to Leave");
@@ -289,9 +297,10 @@ while (true)
             }
         }
 
-        //Staff menu
+        // Staff menu
         else if (input == 4)
-        {
+        {   
+            // View Staff:
             Console.WriteLine("Existing Properties");
             Staff.ViewStaff();  // Pulls from Staff List
             Console.WriteLine("\nPush Key to Leave");
