@@ -16,23 +16,23 @@ namespace Happy_Homes
         public string StaffSurname { get; set; }
         public StaffStatus Status { get; set; }
 
-        public static List<Staff> staff = new();
+        public static List<Staff> staffList = new();
 
         // Constructor
-        public Staff(int staffID, string staffForename, string staffSurname, StaffStatus status)
+        public Staff(string staffForename, string staffSurname, StaffStatus status)
         {
             StaffID = IncrementID++;    // Sets the Instance ID, then Increments
             StaffForename = staffForename;
             StaffSurname = staffSurname;
             Status = status;
 
-            staff.Add(this);    // Adds this instance to the list automatically
+            staffList.Add(this);    // Adds this instance to the list automatically
         }
 
         // Methods
         public static void ViewStaff()
         {
-            foreach (var staff in staff)
+            foreach (var staff in staffList)
             {
                 Console.WriteLine(@$"Staff ID: {staff.StaffID}
 Forename: {staff.StaffForename}
@@ -40,6 +40,10 @@ Surname: {staff.StaffSurname}
 Status: {staff.Status}
 -------------------------------");
             }
+        }
+        public static bool ValidateStaff(int staffID)
+        {                          
+            return staffList.Any(staff => staff.StaffID == staffID && staff.Status == StaffStatus.Available);
         }
     }
 }
