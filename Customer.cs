@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Sources;
 
 namespace Happy_Homes
 {
-    public class Customer 
+    public class Customer
     {
         // Attributes
         private static int IncrementID = 1; // Sets Instance ID, shared across instances
         public int CustomerID { get; private set; } // Stores the ID to unique instance, private set prevents overwriting
-        public string CustomerForename {  get; set; }
+        public string CustomerForename { get; set; }
         public string CustomerSurname { get; set; }
         private string Email { get; set; }
         private string Postal { get; set; }
-        private int Phone {  get; set; }
+        private int Phone { get; set; }
         public int Score { get; set; }
-        
+
         public static List<Customer> customers = new();
         // Constructor
         public Customer(string customerForename, string customerSurname, string email, string postal, int phone, int score)
@@ -36,7 +37,6 @@ namespace Happy_Homes
         // Methods
         //Ammend
         //Remove
-        //View Customers
         public static void ViewCustomer()
         {
             foreach (var customer in customers)
@@ -50,6 +50,10 @@ Phone: {customer.Phone}
 Score: {customer.Score}
 -------------------------------");
             }
+        }
+        public static bool ValidateCustomer(int customerID)
+        {
+            return customers.Any(customer => customer.CustomerID == customerID && customer.Score != 3);
         }
         //Filter Customer (Name)
         //Score Increment
