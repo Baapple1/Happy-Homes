@@ -9,21 +9,37 @@ namespace Happy_Homes
 {
     public class Staff
     {
-        public int StaffID;
+        // Attributes
+        private static int IncrementID = 1; // Sets Instance ID, shared across instances
+        public int StaffID { get; private set; }    // Stores the ID to unique instance, private set prevents overwriting
         public string StaffForename { get; set; }
         public string StaffSurname { get; set; }
-        private StaffRole Role { get; set; }
+        public StaffStatus Status { get; set; }
+
+        public static List<Staff> staff = new();
 
         // Constructor
-        public Staff(int staffID, string staffForename, string staffSurname, StaffRole role)
+        public Staff(int staffID, string staffForename, string staffSurname, StaffStatus status)
         {
-            StaffID = staffID;
+            StaffID = IncrementID++;    // Sets the Instance ID, then Increments
             StaffForename = staffForename;
             StaffSurname = staffSurname;
-            Role = role;
+            Status = status;
+
+            staff.Add(this);    // Adds this instance to the list automatically
         }
 
-        // Method
-
+        // Methods
+        public static void ViewStaff()
+        {
+            foreach (var staff in staff)
+            {
+                Console.WriteLine(@$"Staff ID: {staff.StaffID}
+Forename: {staff.StaffForename}
+Surname: {staff.StaffSurname}
+Status: {staff.Status}
+-------------------------------");
+            }
+        }
     }
 }

@@ -284,24 +284,16 @@ while (true)
                 {
                     Console.WriteLine("Invalid Input");
                 }
-
-                // CustomerSurname
-
-                // Email
-
-                // Postal
-
-                // Phone
-
-                Console.WriteLine("[2]"); // Test
-                Console.ReadKey();
-                Console.Clear();
             }
         }
         //Staff menu
         else if (input == 4)
         {
-
+            Console.WriteLine("Existing Properties");
+            Staff.ViewStaff();  // Pulls from Staff List
+            Console.WriteLine("\nPush Key to Leave");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         // Logout
