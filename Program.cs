@@ -128,11 +128,12 @@ while (true)
             if (input == 1)
             {
                 Console.WriteLine("Existing Bookings:\n");
-                // Pull from Bookings Class
+                Booking.ViewBooking();
                 Console.WriteLine("\nPush Key to Leave");
                 Console.ReadKey();
                 Console.Clear();
             }
+
             // Add Booking:
             else if (input == 2)
             {
@@ -234,6 +235,7 @@ while (true)
                 Console.ReadKey();
                 Console.Clear();
             }
+
             // Add Customer:
             else if (input == 2)
             {
@@ -286,6 +288,7 @@ while (true)
                 }
             }
         }
+
         //Staff menu
         else if (input == 4)
         {
