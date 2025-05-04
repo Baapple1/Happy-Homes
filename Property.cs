@@ -49,6 +49,7 @@ namespace Happy_Homes
                     {
                         Console.Clear();
                         Console.WriteLine($@"{address}: {property.Key}
+-------------------------------
 
 Press any key to continue");
                         found = true;

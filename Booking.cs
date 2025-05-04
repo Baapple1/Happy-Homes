@@ -79,7 +79,7 @@ Staff ID: {booking.StaffID}
                     }
 
                         Console.Clear();
-                    Console.WriteLine("Booking status updated.");
+                    Console.WriteLine("Booking Status Updated \n");
                     found = true;
                     break;
                 }
@@ -88,7 +88,7 @@ Staff ID: {booking.StaffID}
             if (!found)
             {
                 Console.Clear();
-                Console.WriteLine("Booking ID not found.");
+                Console.WriteLine("Invalid Booking ID\n");
             }
         }
     }

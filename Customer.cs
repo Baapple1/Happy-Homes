@@ -17,12 +17,12 @@ namespace Happy_Homes
         public string CustomerSurname { get; set; }
         private string Email { get; set; }
         private string Postal { get; set; }
-        private int Phone { get; set; }
+        private string Phone { get; set; }
         public int Score { get; set; }
 
         public static List<Customer> customers = new();
         // Constructor
-        public Customer(string customerForename, string customerSurname, string email, string postal, int phone, int score)
+        public Customer(string customerForename, string customerSurname, string email, string postal, string phone, int score)
         {
             CustomerID = IncrementID++; // Sets the Instance ID, then Increments
             CustomerForename = customerForename;
@@ -82,21 +82,9 @@ Press any key to continue");
                 Console.WriteLine("Not Found");
             }
         }
-        public static void AddCustomer(string forename, string surname, string email, string postal, int phone)
+        public static void AddCustomer(string forename, string surname, string email, string postal, string phone)
         {
             Customer newCustomer = new Customer(forename, surname, email, postal, phone, 0);
         }
-        public static void AmendCustomer()
-        {
-
-        }
-        public static void DeleteCustomer(int customerID)
-        {
-
-        }
-
-        //Filter Customer (Name)
-        //Score Increment
-        //Block Booking
     }
 }

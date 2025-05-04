@@ -244,9 +244,9 @@ HH:MM");
         else if (keyInput.Key == ConsoleKey.D3)
         {
             Console.WriteLine("Enter Booking ID:");
-            Console.Clear();
             if (int.TryParse(Console.ReadLine(), out int bookingID))
             {
+                Console.Clear();
                 Console.WriteLine(@"Amend the Following:
 [1] Booked
 [2] Attended
@@ -288,9 +288,7 @@ HH:MM");
     {
         Console.Clear();
         Console.WriteLine(@"[1] View Customers
-[2] Add Customer
-[3] Amend Customer
-[4] Remove Customer");
+[2] Add Customer");
         keyInput = Console.ReadKey();
         Console.Clear();
 
