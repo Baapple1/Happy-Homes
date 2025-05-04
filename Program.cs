@@ -247,7 +247,7 @@ HH:MM");
             if (int.TryParse(Console.ReadLine(), out int bookingID))
             {
                 Console.Clear();
-                Console.WriteLine(@"Amend the Following:
+                Console.WriteLine(@"Amend Status:
 [1] Booked
 [2] Attended
 [3] Missed
@@ -278,6 +278,7 @@ HH:MM");
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Invalid input\n");
             }
         }
