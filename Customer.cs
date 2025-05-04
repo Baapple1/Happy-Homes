@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Sources;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Happy_Homes
 {
@@ -35,8 +36,6 @@ namespace Happy_Homes
         }
 
         // Methods
-        //Ammend
-        //Remove
         public static void ViewCustomer()
         {
             foreach (var customer in customers)
@@ -55,9 +54,33 @@ Score: {customer.Score}
         {
             return customers.Any(customer => customer.CustomerID == customerID && customer.Score != 3); // Blocks Booking if score == 3
         }
-        public static void FilterCustomer()
+        public static void FilterCustomer(int requestedCustomer)
         {
+            bool found = false;
+            foreach (var customer in customers)
+            {
+                if (customer.CustomerID == requestedCustomer)
+                {
+                    Console.Clear();
+                    Console.WriteLine($@"Customer ID: {customer.CustomerID}
+Forename: {customer.CustomerForename}
+Surname: {customer.CustomerSurname}
+Email: {customer.Email}
+Postal: {customer.Postal}
+Phone: {customer.Phone}
+Score: {customer.Score}
+-------------------------------
 
+Press any key to continue");
+                    found = true;
+                }
+
+            }
+            if (!found)
+            {
+                Console.Clear();
+                Console.WriteLine("Not Found");
+            }
         }
         public static void AddCustomer(string forename, string surname, string email, string postal, int phone)
         {
@@ -67,9 +90,9 @@ Score: {customer.Score}
         {
 
         }
-        public static void DeleteCustomer(int customerID) 
-        { 
-        
+        public static void DeleteCustomer(int customerID)
+        {
+
         }
 
         //Filter Customer (Name)
