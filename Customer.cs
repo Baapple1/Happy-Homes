@@ -53,8 +53,25 @@ Score: {customer.Score}
         }
         public static bool ValidateCustomer(int customerID)
         {
-            return customers.Any(customer => customer.CustomerID == customerID && customer.Score != 3);
+            return customers.Any(customer => customer.CustomerID == customerID && customer.Score != 3); // Blocks Booking if score == 3
         }
+        public static void FilterCustomer()
+        {
+
+        }
+        public static void AddCustomer(string forename, string surname, string email, string postal, int phone)
+        {
+            Customer newCustomer = new Customer(forename, surname, email, postal, phone, 0);
+        }
+        public static void AmendCustomer()
+        {
+
+        }
+        public static void DeleteCustomer(int customerID) 
+        { 
+        
+        }
+
         //Filter Customer (Name)
         //Score Increment
         //Block Booking
