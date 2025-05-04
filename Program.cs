@@ -9,7 +9,7 @@ using System.Transactions;
 
 // Populate Classes:
 Property.AddProperty(PropertyType.Detached, "Test Address");
-Customer.AddCustomer("TestForename", "TestSurname", "test@email.com", "T3ST P0S7", 0174777362);
+Customer.AddCustomer("TestForename", "TestSurname", "test@email.com", "T3ST P0S7", "0174777362");
 Staff testStaff1 = new Staff("TestForename1", "TestSurname1", StaffStatus.Available);
 Staff testStaff2 = new Staff("TestForename2", "TestSurname2", StaffStatus.Available);
 
@@ -70,6 +70,8 @@ while (true)
                 Console.WriteLine("Enter the Property Address:");
                 string address = Console.ReadLine();
                 Property.AddProperty(PropertyType.Detached, address);
+                Console.Clear();
+                Console.WriteLine("Property Added\n");
             }
             // Semi-Detached
             else if (keyInput.Key == ConsoleKey.D2)
@@ -77,6 +79,8 @@ while (true)
                 Console.WriteLine("Enter the Property Address:");
                 string address = Console.ReadLine();
                 Property.AddProperty(PropertyType.SemiDetached, address);
+                Console.Clear();
+                Console.WriteLine("Property Added\n");
             }
 
             // Bungalow
@@ -85,6 +89,8 @@ while (true)
                 Console.WriteLine("Enter the Property Address:");
                 string address = Console.ReadLine();
                 Property.AddProperty(PropertyType.Bungalow, address);
+                Console.Clear();
+                Console.WriteLine("Property Added\n");
             }
 
             // Flat
@@ -93,6 +99,8 @@ while (true)
                 Console.WriteLine("Enter the Property Address:");
                 string address = Console.ReadLine();
                 Property.AddProperty(PropertyType.Flat, address);
+                Console.Clear();
+                Console.WriteLine("Property Added\n");
             }
 
             // Terrace
@@ -101,6 +109,8 @@ while (true)
                 Console.WriteLine("Enter the Property Address:");
                 string address = Console.ReadLine();
                 Property.AddProperty(PropertyType.Terrace, address);
+                Console.Clear();
+                Console.WriteLine("Property Added\n");
             }
 
             // Enterprise
@@ -109,6 +119,8 @@ while (true)
                 Console.WriteLine("Enter the Property Address:");
                 string address = Console.ReadLine();
                 Property.AddProperty(PropertyType.Enterprise, address);
+                Console.Clear();
+                Console.WriteLine("Property Added\n");
             }
 
             else
@@ -145,39 +157,42 @@ while (true)
             // Customer ID
             Console.WriteLine("Enter Customer ID:");
             string sCustomerID = Console.ReadLine();
+            Console.Clear();
             if (int.TryParse(sCustomerID, out int customerID))
             {
                 if (Customer.ValidateCustomer(customerID))   // Validate customerID && score != 3
                 {
                     // Date
-                    Console.Clear();
-                    Console.WriteLine("Enter Date of Viewing:");
+                    Console.WriteLine(@"Enter Date of Viewing:
+DD/MM/YYYY");
                     string sDate = Console.ReadLine();
+                    Console.Clear();
                     if (DateOnly.TryParse(sDate, out DateOnly date))
                     {
                         // Time
-                        Console.Clear();
-                        Console.WriteLine("Enter Time of Viewing:");
+                        Console.WriteLine(@"Enter Time of Viewing:
+HH:MM");
                         string sTime = Console.ReadLine();
+                        Console.Clear();
                         if (TimeOnly.TryParse(sTime, out TimeOnly time))
                         {
                             // Property (address)
-                            Console.Clear();
                             Console.WriteLine("Enter the Address of Viewing:");
                             string address = Console.ReadLine();
+                            Console.Clear();
                             if (Property.ValidateProperty(address))   // Validate address
                             {
                                 //  Staff ID
-                                Console.Clear();
                                 Console.WriteLine("Enter Staff ID:");
                                 string sStaffID = Console.ReadLine();
+                                Console.Clear();
                                 if (int.TryParse(sStaffID, out int staffID))
                                 {
                                     if (Staff.ValidateStaff(staffID))   // Validate StaffID && check Availability
                                     {
-                                        Console.Clear();
+
                                         var booking = new Booking(customerID, date, time, address, BookingStatus.Booked, staffID);
-                                        Console.WriteLine($"New booking Created: \n{booking}");
+                                        Console.WriteLine($"New booking Created\n");
                                         // Set Staff to Unavailable
                                         var staffStatus = Staff.staffList.First(staff => staff.StaffID == staffID); // Searches for first corresponding staffID in list
                                         staffStatus.Status = StaffStatus.Unavailable;   // Sets staff to Unavailable
@@ -226,36 +241,44 @@ while (true)
         }
 
         // Amend Booking:
-
         else if (keyInput.Key == ConsoleKey.D3)
         {
             Console.WriteLine("Enter Booking ID:");
-            Console.WriteLine(@"Amend the Following:
+            Console.Clear();
+            if (int.TryParse(Console.ReadLine(), out int bookingID))
+            {
+                Console.WriteLine(@"Amend the Following:
 [1] Booked
 [2] Attended
 [3] Missed
 [4] Cancelled");
-            keyInput = Console.ReadKey();
-            if (keyInput.Key == ConsoleKey.D1)
-            {
 
-            }
-            else if (keyInput.Key == ConsoleKey.D2)
-            {
-
-            }
-            else if (keyInput.Key == ConsoleKey.D3)
-            {
-
-            }
-            else if (keyInput.Key == ConsoleKey.D4)
-            {
-
+                keyInput = Console.ReadKey();
+                if (keyInput.Key == ConsoleKey.D1)
+                {
+                    Booking.AmendBooking(bookingID, BookingStatus.Booked);
+                }
+                else if (keyInput.Key == ConsoleKey.D2)
+                {
+                    Booking.AmendBooking(bookingID, BookingStatus.Attended);
+                }
+                else if (keyInput.Key == ConsoleKey.D3)
+                {
+                    Booking.AmendBooking(bookingID, BookingStatus.Missed);
+                }
+                else if (keyInput.Key == ConsoleKey.D4)
+                {
+                    Booking.AmendBooking(bookingID, BookingStatus.Cancelled);
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid Input\n");
+                }
             }
             else
             {
-                Console.Clear();
-                Console.WriteLine("Invalid Input\n");
+                Console.WriteLine("Invalid input\n");
             }
         }
     }
@@ -276,7 +299,7 @@ while (true)
         {
             Console.WriteLine("Existing Customers:\n");
             Customer.ViewCustomer();
-            Console.WriteLine("[1] Filter by Forename \n [2] Filter by Surname \nPush any key to continue");
+            Console.WriteLine("[1] Filter by ID \nPush any key to continue");
             keyInput = Console.ReadKey();
             Console.Clear();
             if (keyInput.Key == ConsoleKey.D1)
@@ -321,13 +344,10 @@ while (true)
                             // Phone
                             Console.Clear();
                             Console.WriteLine("Enter the Customer Phone Number:");
-                            string sPhone = Console.ReadLine();
-                            if (int.TryParse(sPhone, out int phone))
-                            {
-                                Console.Clear();
-                                Customer.AddCustomer(forename, surname, email, postal, phone);
-                                Console.WriteLine($"Customer Added: \n"); 
-                            }
+                            string phone = Console.ReadLine();
+                            Console.Clear();
+                            Customer.AddCustomer(forename, surname, email, postal, phone);
+                            Console.WriteLine($"Customer Added: \n");
                         }
                         else
                         {
